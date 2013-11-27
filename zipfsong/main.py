@@ -7,13 +7,12 @@ if __name__=='__main__':
 	for line in sys.stdin:
 		lines.append(line)
 
-	counts = dict(zip(['totalTracks', 'selectTracks'], map(int, lines[0].split())))
+	[ totalTracks, selectTracks ] = map(int, lines[0].split())
 		
-	album = Album(counts['totalTracks'], counts['selectTracks'])
-
+	album = Album(totalTracks, selectTracks)
 	for index in range(0, album.totalSongs):
-		song = dict(zip(['playcount', 'title'], lines[index+1].split()))
-		album.append(index+1, song['playcount'], song['title'])
+		[ playcount, title ] = lines[index+1].split()
+		album.append(index + 1, playcount, title)
 
 	for song in album.extract():
 		print song
